@@ -1,0 +1,47 @@
+import random
+x=float(input('輸入合成成功機率(0~1):'))
+failed=0
+success1=0
+success2=0
+success3=0
+Totalsuccess=0
+times=0
+normalitem=1
+totalnormal=0
+while(success3<=99):
+    percentage=random.random()
+    normalitem=1
+    normalitem=normalitem*3
+    times+=1
+    if(percentage>x):
+        failed+=1
+    else:
+        success1+=1
+        Totalsuccess+=1
+    totalnormal=totalnormal+normalitem
+    normalitem=0
+    if(success1==3):
+        times+=1
+        percentage=random.random()
+        if(percentage<=x):
+            success2+=1
+            success1=0
+            Totalsuccess+=1
+        else:
+            failed+=1
+            success1=0
+    if(success2==3):
+        percentage=random.random()
+        times+=1
+        if(percentage<=x):
+            success3+=1
+            success2=0
+            Totalsuccess+=1
+        else:
+            failed+=1
+            success2=0
+successpercentage=success3/times
+average3=totalnormal/success3
+crystalaverage=times/success3
+print('共合成{}次，其中成功{}次，失敗{}次：成功率為{:.2f}共花費了{}件普通裝備。平均合成一件三星裝備需準備{:.2f}件普裝，{}個水晶'.format(times,Totalsuccess,failed,successpercentage,totalnormal,average3,crystalaverage))
+
